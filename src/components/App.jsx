@@ -7,6 +7,7 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
+
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
@@ -23,15 +24,17 @@ function App() {
   }
 
   async function addNote(newNote) {
+
     setNotes(prevNotes => {
-       axios.post(`https://anywhere-notes.herokuapp.com/updateElement`,{
-        noteArray: [...prevNotes, newNote]
-      }).catch(error => {
-        console.log(error);
-      })
+        axios.post(`https://anywhere-notes.herokuapp.com/updateElement`,{
+          noteArray: [...prevNotes, newNote]
+        }).catch(error => {
+          console.log(error);
+        })
+        return [...prevNotes, newNote];
       // console.log([...prevNotes, newNote]);
-      return [...prevNotes, newNote];
     });
+  
   }
 
   function deleteNote(id) {
